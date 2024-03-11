@@ -18,4 +18,21 @@ const getAllProduct = async (req, res) => {
     res.status(200).send(product);
   };
 
-  module.exports = {getAllProduct, getOneProduct}
+
+  const uploadimage = async (req, res) => {
+    const image = req.file.filename;
+    const product = await Product.update(
+      { imageUrl: image },
+      { where: { title: req.body.title } }
+    );
+  }
+
+  const uploadthumbimage = async (req,res) => {
+    const image = req.file.filename;
+    const product = await Product.update(
+      { thumbnailImage: image },
+      { where: { title: req.body.title } }
+    );
+  }
+
+  module.exports = {getAllProduct, getOneProduct, uploadimage, uploadthumbimage }
